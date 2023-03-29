@@ -15,6 +15,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
 		<file:read doc:name="Read" doc:id="1428b1f3-9839-45f2-8e6c-1163042e00dd" config-ref="File_Config" path="D:\Mulesoft\MULESOFT HR email ids updated as on 04.10.2021 (1).txt"/>
 		<file:write doc:name="Write" doc:id="01168175-9d6c-4fbe-a3c4-c9916c6e5274" config-ref="File_Config" path="D:\Mulesoft\MULESOFT HR email ids updated as on 04.10.2021 (1).txtfolder"/>
 		<file:delete doc:name="Delete" doc:id="9dc5f9bf-e7d4-4473-9749-329e59818914" config-ref="File_Config" path="D:\Mulesoft\MULESOFT HR email ids updated as on 04.10.2021 (1).txtfolder"/>
+		<logger level="INFO" doc:name="Logger" doc:id="27b870e5-0b42-4c82-ac7b-f0f0fe574856" message="#[payload]"/>
 	</flow>
 	<flow name="fileconnectorsFlow1" doc:id="e8c2b340-b5d1-46a2-8d5a-73eb68777b88" >
 		<file:listener doc:name="On New or Updated File" doc:id="50092c16-4d54-4194-8883-06f3ca588ecc" config-ref="File_Config" directory="D:\Mulesoft\New folder" moveToDirectory="D:\HR Related\Appminds\Recharges">
