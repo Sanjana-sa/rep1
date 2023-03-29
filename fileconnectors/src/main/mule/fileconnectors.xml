@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="7236d7b5-8ca9-44b7-a828-318b47d56a42" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<file:config name="File_Config" doc:name="File Config" doc:id="684b67f0-9eec-4de5-9701-18d4cd9d57ca" />
+	<flow name="fileconnectorsFlow" doc:id="bc7e9ab0-4d77-4daa-81c8-291426942d6c" >
+		<http:listener doc:name="Listener" doc:id="7dee4587-4c04-445d-8dcb-d700be17c31a" config-ref="HTTP_Listener_config" path="/connectors"/>
+		<logger level="INFO" doc:name="Logger" doc:id="4c380c8b-bb73-4c60-ade2-4065bce05a24" message="this is file connectors flow"/>
+		<file:read doc:name="Read" doc:id="1428b1f3-9839-45f2-8e6c-1163042e00dd" config-ref="File_Config" path="D:\Mulesoft\MULESOFT HR email ids updated as on 04.10.2021 (1).txt"/>
+		<file:write doc:name="Write" doc:id="01168175-9d6c-4fbe-a3c4-c9916c6e5274" config-ref="File_Config" path="D:\Mulesoft\MULESOFT HR email ids updated as on 04.10.2021 (1).txtfolder"/>
+		<file:delete doc:name="Delete" doc:id="9dc5f9bf-e7d4-4473-9749-329e59818914" config-ref="File_Config" path="D:\Mulesoft\MULESOFT HR email ids updated as on 04.10.2021 (1).txtfolder"/>
+	</flow>
+	<flow name="fileconnectorsFlow1" doc:id="e8c2b340-b5d1-46a2-8d5a-73eb68777b88" >
+		<file:listener doc:name="On New or Updated File" doc:id="50092c16-4d54-4194-8883-06f3ca588ecc" config-ref="File_Config" directory="D:\Mulesoft\New folder" moveToDirectory="D:\HR Related\Appminds\Recharges">
+			<scheduling-strategy >
+				<fixed-frequency frequency="1" timeUnit="MINUTES"/>
+			</scheduling-strategy>
+		</file:listener>
+		<logger level="INFO" doc:name="Logger" doc:id="96d99de4-924b-42a9-97c9-733ddc2a2d94" message="new file"/>
+	</flow>
+</mule>
